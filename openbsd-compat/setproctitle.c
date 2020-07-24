@@ -160,8 +160,10 @@ setproctitle(const char *fmt, ...)
 /*	debug("setproctitle: copy \"%s\" into len %d",
 	    buf, argv_env_len); */
 	len = strlcpy(argv_start, ptitle, argv_env_len);
+#ifndef __CHERI_PURE_CAPABILITY__
 	for(; len < argv_env_len; len++)
 		argv_start[len] = SPT_PADCHAR;
+#endif
 #endif
 
 #endif /* SPT_NONE */
