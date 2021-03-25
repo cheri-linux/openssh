@@ -54,6 +54,13 @@
 # define SPT_TYPE	SPT_NONE
 #endif
 
+/* SPT_TYPE SPT_REUSEARGV is incompatible with Cheri since it intentionally
+ * overflows the argv[0] pointer */
+#ifdef __CHERI_PURE_CAPABILITY__
+#undef SPT_TYPE
+#define SPT_TYPE SPT_NONE
+#endif
+
 #ifndef SPT_PADCHAR
 # define SPT_PADCHAR	'\0'
 #endif
